@@ -2,45 +2,37 @@
 ######pary input######
 
 
-charnumber = int(input("number of characters in party? "))
-
+charnumber = int(input("Number of characters in the party? "))
 count = 0
 charlevels = [0,0,0,0,0,0,0,0,0,0]
-while count < charnumber:
-  print("character %d is what level? " % (count +1))
+
+while count < charnumber and charnumber > 1:
+  print("Character %d is what level? " % (count +1))
   charlevels[count] = int(input(" "))
   count += 1
+if charnumber < 2:
+  print("The character is what level? ")
+  charlevels[count] = int(input(" "))
 
 
 ######monster input######
 
 
-totalmonsters = int(input("total number of monsters? "))
-monsterleaders = int(input("of the total monsters, how many are leaders? "))
-
-#count = 0
-#leader_xp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-#while count < monsterleaders:
-#  print("Leader %d was ORIGINALY what XP? " % (count +1))
-#  leader_xp[count] = int(input(" "))
-#  count += 1
-#
-#count = 0
-#monster_xp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-#while count < (totalmonsters - monsterleaders):
-#  print("Minion %d was ORIGINALY what XP? " % (count +1))
-#  monster_xp[count] = int(input(" "))
-#  count += 1
+totalmonsters = int(input("Total number of monsters? "))
+if totalmonsters > 1:
+  monsterleaders = int(input("Of the total monsters, how many are leaders? "))
+else:
+  monsterleaders = 1
 
 
-######advantage imput######
+######advantage input######
 
 
-advantage = int(input("how many player advantages? "))
-disadvantage = int(input("how many monster advantages? "))
+advantage = int(input("How many player advantages? "))
+disadvantage = int(input("How many monster advantages? "))
 
-print("1: easy 2: medium 3: hard 4: deadly")
-input_difficulty = int(input("choose difficulty? "))
+print("1: Easy 2: Medium 3: Hard 4: Deadly")
+input_difficulty = int(input("Choose difficulty "))
 
 
 ######BODY######
@@ -78,11 +70,8 @@ while count < charnumber:
   total_party_xpthresh += (difficulty[holder][charlevels[count]-1])
   count += 1
 
-print(' ')
-print('The total XP your party can handle is: %s' % (total_party_xpthresh))
 
-
-######monster multipler######
+######multipler######
 
  
 multiplier = [0.50, 0.75, 1, 1.25, 1.50, 1.75, 2, 2.25, 2.50, 2.75, 3, 3.25, 3.50, 3.75, 4, 4.25, 4.50, 4.75, 5]
@@ -90,7 +79,7 @@ multiplier = [0.50, 0.75, 1, 1.25, 1.50, 1.75, 2, 2.25, 2.50, 2.75, 3, 3.25, 3.5
 
 position = 2 + (4 - charnumber) #party size
 
-if charnumber >= 6:   # if party is 6+ then set to 0.50
+if charnumber >= 6:   #if party is 6+ then set to 0.50#
     position = 0
 
 
@@ -117,16 +106,7 @@ if totalmonsters >= 15:
 
 
 raw_xp_total = total_party_xpthresh / (multiplier[position])
-divided_xp = raw_xp_total / ((monsterleaders * 2)+ (totalmonsters - monsterleaders))
-
-
-#print("TOTAL XP: %d" % raw_xp_total)
-#if monsterleaders > 0:
-#    print("THE %d LEADER(S) IS WORTH: %d XP EACH" % (monsterleaders , (divided_xp * 2)))
-#if totalmonsters - monsterleaders > 0:
-#    print("THE %d MINION(S) ARE WORTH: %d XP EACH" % ((totalmonsters - monsterleaders) , divided_xp))
-
-
+divided_xp = raw_xp_total / ((monsterleaders * 2) + (totalmonsters - monsterleaders))
 divided_leader_xp = (divided_xp * 2)
 divided_monster_xp = divided_xp
 
@@ -193,8 +173,12 @@ def sa_fun(count, cr_count):
 ######finding range between XP intervals######
 
 
-print("")
-print("Each of the %s Leaders has: " % monsterleaders) 
+if totalmonsters > 1:
+  print("")
+  print("Each of the %s Leaders has: " % monsterleaders)
+if totalmonsters <= 1:
+  print("The monster has: ")
+
 count = 0
 cr_count = cr_fun(count, 0)
 cr_count_back = cr_fun(count - 1, 0)
@@ -218,26 +202,27 @@ print('DC: ', round((ratio * (dc_fun(count, cr_count) - dc_fun(count - 1, cr_cou
 print('SAVE: ', round((ratio * (sa_fun(count, cr_count) - sa_fun(count - 1, cr_count_back))) + sa_fun(count - 1,cr_count_back)))
 
 
-print("")
-print("Each of the %s Minions has: " % (totalmonsters - monsterleaders))
-count = 0
-cr_count = cr_fun(count, 0)
-cr_count_back = cr_fun(count - 1, 0)
-while divided_monster_xp > xp_fun(count, cr_count) :
-    cr_count = cr_fun(count, 0)
-    cr_count_back = cr_fun(count - 1, 0)
-    count += 1
+if totalmonsters > 1:
+  print("")
+  print("Each of the %s Minions has: " % (totalmonsters - monsterleaders))
+  count = 0
+  cr_count = cr_fun(count, 0)
+  cr_count_back = cr_fun(count - 1, 0)
+  while divided_monster_xp > xp_fun(count, cr_count) :
+      cr_count = cr_fun(count, 0)
+      cr_count_back = cr_fun(count - 1, 0)
+      count += 1
 
 
 ratio = (divided_monster_xp - xp_fun(count - 1, 0)) / (xp_fun(count, 0) - xp_fun(count - 1, 0))
 
-
-#print('CR: ', round((ratio * (cr_fun(count, cr_count) - cr_fun(count - 1, cr_count_back))) + cr_fun(count - 1,cr_count_back)))
-print('XP: ', round((ratio * (xp_fun(count, cr_count) - xp_fun(count - 1, cr_count_back))) + xp_fun(count - 1,cr_count_back)))
-print('PROF. B: ', round((ratio * (pb_fun(count, cr_count) - pb_fun(count - 1, cr_count_back))) + pb_fun(count - 1,cr_count_back)))
-print('AC: ', round((ratio * (ac_fun(count, cr_count) - ac_fun(count - 1, cr_count_back))) + ac_fun(count - 1,cr_count_back)))
-print('HP: ', round((ratio * (hp_fun(count, cr_count) - hp_fun(count - 1, cr_count_back))) + hp_fun(count - 1,cr_count_back)))
-print('ATTACK B: ', round((ratio * (ab_fun(count, cr_count) - ab_fun(count - 1, cr_count_back))) + ab_fun(count - 1,cr_count_back)))
-print('DAMAGE: ', round((ratio * (da_fun(count, cr_count) - da_fun(count - 1, cr_count_back))) + da_fun(count - 1,cr_count_back)))
-print('DC: ', round((ratio * (dc_fun(count, cr_count) - dc_fun(count - 1, cr_count_back))) + dc_fun(count - 1,cr_count_back)))
-print('SAVE: ', round((ratio * (sa_fun(count, cr_count) - sa_fun(count - 1, cr_count_back))) + sa_fun(count - 1,cr_count_back)))
+if totalmonsters > 1:
+  #print('CR: ', round((ratio * (cr_fun(count, cr_count) - cr_fun(count - 1, cr_count_back))) + cr_fun(count - 1,cr_count_back)))
+  print('XP: ', round((ratio * (xp_fun(count, cr_count) - xp_fun(count - 1, cr_count_back))) + xp_fun(count - 1,cr_count_back)))
+  print('PROF. B: ', round((ratio * (pb_fun(count, cr_count) - pb_fun(count - 1, cr_count_back))) + pb_fun(count - 1,cr_count_back)))
+  print('AC: ', round((ratio * (ac_fun(count, cr_count) - ac_fun(count - 1, cr_count_back))) + ac_fun(count - 1,cr_count_back)))
+  print('HP: ', round((ratio * (hp_fun(count, cr_count) - hp_fun(count - 1, cr_count_back))) + hp_fun(count - 1,cr_count_back)))
+  print('ATTACK B: ', round((ratio * (ab_fun(count, cr_count) - ab_fun(count - 1, cr_count_back))) + ab_fun(count - 1,cr_count_back)))
+  print('DAMAGE: ', round((ratio * (da_fun(count, cr_count) - da_fun(count - 1, cr_count_back))) + da_fun(count - 1,cr_count_back)))
+  print('DC: ', round((ratio * (dc_fun(count, cr_count) - dc_fun(count - 1, cr_count_back))) + dc_fun(count - 1,cr_count_back)))
+  print('SAVE: ', round((ratio * (sa_fun(count, cr_count) - sa_fun(count - 1, cr_count_back))) + sa_fun(count - 1,cr_count_back)))
