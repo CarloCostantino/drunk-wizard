@@ -1,0 +1,103 @@
+<!--
+
+-Page Info and How to:
+	-Brag about why its unique to the other calculators lol
+	-proofs to prove math and rules (ooo good call, for the haters)
+	-Ease for the Improvisation DM
+
+
+
+-Inputs (Single page site?)
+  -Party Input:
+			Size & Levels  DROP DOWN MENU
+      Save:
+				Save Cookie (local harddrive stores party data)
+      	user data on server log in
+      	Store party for this visit only
+	-Monster vs Player Environmnetal Advantages/Disadvantages (need book examples) DROP DOWN MENU
+
+  -Select Mode:
+		-One encounter at a time 
+					select Difficulty
+					Warn when short, Long rests should occure, how many fights have gone down vs how many suggested
+	
+		-Adventuring Day:   DROP DOWN MENU
+			Option: 6-8 Med to Hard encounters 
+		  Option: 3-4 Med then Hard encounters (check math) (use CR calculator to give just +4 damage, when entering hard portion of combat)
+ 		  Option: 1-2 (Med then Hard)x2 encounters (Check math)
+			Option: Random Adventuring Day Generator (not true random, must have rules control the random)
+			Warn when short, Long rests should occure
+			Treasure Table Suggestions (with examples of rarity)(with book table names to reference)
+
+
+-Output
+		Potential Encounter Sizes & Xp
+		Stat Blocks: XP, Proficancy Bonus, AC, HP, Attack Bonus, Damage, DC, Saves (include notes from the guy who made the stats)
+		
+
+
+-Generators: 
+		Enemy Visual  (info and proofs on how it works)
+		Name Generator (info and proofs on how it works)
+		Possible to link to other platforms and apps which store all monster stats and such.
+		Dice rolls
+		Creature CR raise or lower  (info and proofs on how it works)
+		
+-->
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Improv DM Assistant</title>
+</head>
+<body>
+  <header roll="banner" id="intro">
+    <h1>Improv DM Assistant</h1>
+    <h2>Encounter generator for small party sizes</h2>
+    <nav role="navigation">
+      <ol>
+        <li><a href="#party" title="Input party information">Enter Party Info</a>
+        <li><a href="#advantages" title="Input party and monster advantages">Enter Advantages</a>
+        <li><a href="#difficulty" title="Input encounter difficulty">Enter Difficulty</a>
+        <li><a href="#output" title="Encounter recomendations">Monster XP Recomendations</a>
+        <li><a href="#resources" title="Proof of concept and resources">Resources</a>
+      </ol>
+    </nav>
+  </header>
+<main roll="main">
+  <article roll="article">
+    <section>
+    <h3 id="party">Party Information</h3>
+      <p>DROPDOWN MENU for party size (made out of buttons instead of traditional dropdown menu)</p>
+    <h3 id="advantages">Player and Monster Advantages</h3>
+      <p>DROPDOWN MENU for player advantages (1-6 options)<!-- < 6 options for simplicity --></p>
+      <p>DROPDOWN MENU for monster advantages (1-6 options)</p>
+    <h3 id="difficulty">Adventuring Day Difficulty</h3>
+      <p>DROPDOWN MENU (easy, med, hard, adventure(random))</p>
+    </section>
+    <section>
+    <h3 id="output">Monster XP Recomendations</h3>
+      <ul>
+        <li>potential monster quantity</li><!-- perhaps a DROPDOWN MENU that lets you choose? -->
+        <li>XP</li>
+        <li>Proficancy Bonus</li>
+        <li>AC</li>
+        <li>HP</li>
+        <li>Attack Bonus</li>
+        <li>Damage</li>
+        <li>DC</li>
+        <li>Saves</li>
+      </ul>
+    </section>
+  </article>
+</main>
+<footer>
+  <h3 roll="contentinfo" id="resources">Resources and proof of concept</h3>
+  	<p>List of links and technical pages explaining how the app works and how the math confirms its logic</p>
+</footer>
+</body>
+</html>
